@@ -39,10 +39,8 @@ test('when default write() then version on stdout', () => {
     .exitOverride()
     .version('1.2.3');
 
-  expect(() => {
-    program.parse(['--version'], { from: 'user' });
-  }).toThrow();
-
+  
+  program.parse(["--version"], { from: "user" });
   expect(writeSpy).toHaveBeenCalledTimes(1);
   writeSpy.mockRestore();
 });
@@ -56,10 +54,8 @@ test('when custom write() then version on custom output', () => {
     .version('1.2.3')
     .configureOutput({ writeOut: customWrite });
 
-  expect(() => {
-    program.parse(['--version'], { from: 'user' });
-  }).toThrow();
-
+  
+  program.parse(["--version"], { from: "user" });
   expect(writeSpy).toHaveBeenCalledTimes(0);
   expect(customWrite).toHaveBeenCalledTimes(1);
   writeSpy.mockRestore();

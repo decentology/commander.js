@@ -32,10 +32,10 @@ describe('.version', () => {
       .configureOutput({ writeOut: writeMock })
       .version(myVersion);
 
-    expect(() => {
-      program.parse(['node', 'test', '-V']);
-    }).toThrow(myVersion);
+    program.parse(["node", "test", "-V"]);
     expect(writeMock).toHaveBeenCalledWith(`${myVersion}\n`);
+    expect(writeMock).toHaveBeenCalledTimes(1);
+    
   });
 
   test('when specify default long flag then display version', () => {
@@ -47,9 +47,7 @@ describe('.version', () => {
       .configureOutput({ writeOut: writeMock })
       .version(myVersion);
 
-    expect(() => {
-      program.parse(['node', 'test', '--version']);
-    }).toThrow(myVersion);
+    program.parse(["node", "test", "--version"]);
     expect(writeMock).toHaveBeenCalledWith(`${myVersion}\n`);
   });
 
@@ -74,9 +72,7 @@ describe('.version', () => {
       .configureOutput({ writeOut: writeMock })
       .version(myVersion, '-r, --revision');
 
-    expect(() => {
-      program.parse(['node', 'test', '-r']);
-    }).toThrow(myVersion);
+    program.parse(["node", "test", "-r"]);
     expect(writeMock).toHaveBeenCalledWith(`${myVersion}\n`);
   });
 
@@ -89,9 +85,7 @@ describe('.version', () => {
       .configureOutput({ writeOut: writeMock })
       .version(myVersion, '-r');
 
-    expect(() => {
-      program.parse(['node', 'test', '-r']);
-    }).toThrow(myVersion);
+    program.parse(["node", "test", "-r"]);
     expect(writeMock).toHaveBeenCalledWith(`${myVersion}\n`);
   });
 
@@ -104,9 +98,7 @@ describe('.version', () => {
       .configureOutput({ writeOut: writeMock })
       .version(myVersion, '-r, --revision');
 
-    expect(() => {
-      program.parse(['node', 'test', '--revision']);
-    }).toThrow(myVersion);
+    program.parse(["node", "test", "--revision"]);
     expect(writeMock).toHaveBeenCalledWith(`${myVersion}\n`);
   });
 
@@ -119,9 +111,7 @@ describe('.version', () => {
       .configureOutput({ writeOut: writeMock })
       .version(myVersion, '--revision');
 
-    expect(() => {
-      program.parse(['node', 'test', '--revision']);
-    }).toThrow(myVersion);
+    program.parse(["node", "test", "--revision"]);
     expect(writeMock).toHaveBeenCalledWith(`${myVersion}\n`);
   });
 
@@ -162,10 +152,10 @@ describe('.version', () => {
       .version(myVersion)
       .command('version')
       .action(() => {});
-
-    expect(() => {
-      program.parse(['node', 'test', '--version']);
-    }).toThrow(myVersion);
+    // expect(() => {
+    //   program.parse(["node", "test", "--version"]);
+    // }).toThrow()
+    program.parse(["node", "test", "--version"]);
     expect(writeMock).toHaveBeenCalledWith(`${myVersion}\n`);
   });
 
